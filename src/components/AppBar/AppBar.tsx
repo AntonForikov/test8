@@ -12,7 +12,7 @@ const AppBar: React.FC = () => {
           <NavLink className="nav-link" to="/">Quotes</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link" to="/add">Submit new quote</NavLink>
+          <NavLink className="nav-link" to="/add-quote">Submit new quote</NavLink>
         </li>
       </ul>
     </nav>
