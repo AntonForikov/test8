@@ -3,6 +3,7 @@ import {QuoteType, SelectOptions} from '../../types';
 import axiosAPI from '../../axiosAPI';
 import {NavLink, useParams} from 'react-router-dom';
 import Quote from '../Quote/Quote';
+import Spinner from '../Spinner/Spinner';
 
 interface Props {
   selectOptions: SelectOptions[]
@@ -12,13 +13,6 @@ const Category: React.FC<Props> = ({selectOptions}) => {
   const param = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [quotes, setQuotes] = useState<QuoteType[]>([]);
-
-  // const getDataByCategory = async (id: string) => {
-  //   const response = await axiosAPI.get(`/quotes.json?orderBy="category"&equalTo="${id}"`);
-  //
-  // };
-
-
 
   const getDataByCategory = useCallback(async (id: string | undefined) => {
     try {
@@ -51,6 +45,8 @@ const Category: React.FC<Props> = ({selectOptions}) => {
     await axiosAPI.delete('/quotes/' + id + '.json');
     void getDataByCategory(param.categoryId);
   };
+
+  if (isLoading) return <Spinner />;
 
   if (!quotes) return <h1>Category not found</h1>;
 
