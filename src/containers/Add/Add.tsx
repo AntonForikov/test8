@@ -37,18 +37,35 @@ const Add: React.FC<Props> = ({edit}) => {
     }));
   };
 
-  if (edit) {
-    const setCurrentQuote = useCallback(async  () => {
-        const currentQuote = await axiosAPI.get<ApiQuote | null>(`/quotes/${params.id}.json`);
-        if (currentQuote.data) {
-          setQuote(currentQuote.data);
-        }
-      }, [params.id]);
+  const setCurrentQuote = useCallback(async  () => {
+    const currentQuote = await axiosAPI.get<ApiQuote | null>(`/quotes/${params.id}.json`);
+    if (currentQuote.data) {
+      setQuote(currentQuote.data);
+    } else {
+      setQuote({
+        category: '',
+        author: '',
+        text: ''
+      });
+    }
+  }, [params.id]);
 
-    useEffect(() => {
-      void setCurrentQuote();
-    }, [setCurrentQuote]);
-  }
+  useEffect(() => {
+    void setCurrentQuote();
+  }, [setCurrentQuote]);
+
+  // if (edit) {
+  //   const setCurrentQuote = useCallback(async  () => {
+  //       const currentQuote = await axiosAPI.get<ApiQuote | null>(`/quotes/${params.id}.json`);
+  //       if (currentQuote.data) {
+  //         setQuote(currentQuote.data);
+  //       }
+  //     }, [params.id]);
+  //
+  //   useEffect(() => {
+  //     void setCurrentQuote();
+  //   }, [setCurrentQuote]);
+  // }
 
   const onFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,7 +89,7 @@ const Add: React.FC<Props> = ({edit}) => {
     {
       loading ? <Spinner/> :
         <form className="mt-2" onSubmit={onFormSubmit}>
-          <h1>Submit new quote</h1>
+          <h1>{edit ? 'Edit a quote' : 'Submit new quote'}</h1>
 
           <label htmlFor='select'>Category:</label>
           <select
@@ -107,7 +124,7 @@ const Add: React.FC<Props> = ({edit}) => {
             onChange={quoteChange}
             required
           />
-          <button type="submit" className="btn btn-primary mt-3">Save</button>
+          <button type="submit" className="btn btn-primary mt-3">{edit ? 'Edit' : 'Save'}</button>
         </form>
     }
   </>);

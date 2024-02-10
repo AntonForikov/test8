@@ -15,8 +15,6 @@ const Home: React.FC = () => {
       const response = await axiosAPI.get<ApiQuotes | null>('/quotes.json');
       const quotesApi = response.data;
 
-      console.log(quotesApi);
-
       if (!quotesApi) {
         alert("This endpoint is empty.");
       }
@@ -54,7 +52,7 @@ const Home: React.FC = () => {
             <div key={Math.random()} className="card mt-3">
               <div className="card-body">
                 <h4>{`"${quote.text}"`} - {quote.author}</h4>
-                <Link className="btn btn-primary" to={`/quote/${quote.id}/edit`}>Edit</Link>
+                <Link className="btn btn-primary me-2" to={`/quote/${quote.id}/edit`}>Edit</Link>
                 <button className="btn btn-danger" onClick={() => deleteQuote(quote.id)}>Delete</button>
               </div>
             </div>
