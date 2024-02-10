@@ -4,10 +4,15 @@ export interface ApiQuote {
   category: string
 }
 
-export interface Quote extends ApiQuote {
+export interface QuoteType extends ApiQuote {
   id: string
 }
 
 export interface ApiQuotes extends ApiQuote {
   [id: string]: ApiQuote
+}
+
+export interface SelectOptions {
+  id: string,
+  title: string
 }

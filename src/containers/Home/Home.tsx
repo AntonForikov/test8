@@ -2,12 +2,16 @@ import React, {useCallback, useEffect, useState} from 'react';
 import axiosAPI from '../../axiosAPI';
 import Spinner from '../../components/Spinner/Spinner';
 
-import {ApiQuotes, Quote} from '../../types';
-import {Link} from 'react-router-dom';
+import {ApiQuotes, QuoteType, SelectOptions} from '../../types';
+import Category from '../../components/Category/Category';
+import Quote from '../../components/Quote/Quote';
 
-const Home: React.FC = () => {
+interface Props {
+  selectOptions: SelectOptions[]
+}
+const Home: React.FC<Props> = ({selectOptions}) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [quotes, setQuotes] = useState<Quote[]>([]);
+  const [quotes, setQuotes] = useState<QuoteType[]>([]);
 
   const getData = useCallback(async () => {
     try {
@@ -39,24 +43,16 @@ const Home: React.FC = () => {
     void getData();
   };
 
-  return (<>
+  return (<div className='d-flex'>
+    <Category selectOptions={selectOptions} />
+
     {isLoading ? <Spinner/> : quotes.length > 0 ?
-      <>
+      <div>
         <h1>All</h1>
-        {quotes.map(quote => {
-          return (
-            <div key={Math.random()} className="card mt-3">
-              <div className="card-body">
-                <h4>{`"${quote.text}"`} - {quote.author}</h4>
-                <Link className="btn btn-primary me-2" to={`/quote/${quote.id}/edit`}>Edit</Link>
-                <button className="btn btn-danger" onClick={() => deleteQuote(quote.id)}>Delete</button>
-              </div>
-            </div>
-          );
-        })}
-      </>
+        {quotes.map(quote => <Quote key={Math.random()} quote={quote} onClick={() => deleteQuote(quote.id)}/>)}
+      </div>
       : <h1>There is no quotes</h1>
     }
-  </>);
+  </div>);
 };
 export default Home;

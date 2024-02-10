@@ -2,13 +2,14 @@ import React, {useCallback, useEffect, useState} from 'react';
 import Spinner from '../../components/Spinner/Spinner';
 import axiosAPI from '../../axiosAPI';
 import {useNavigate, useParams} from 'react-router-dom';
-import {ApiQuote} from '../../types';
+import {ApiQuote, SelectOptions} from '../../types';
 
 interface Props {
   edit: boolean
+  selectOptions: SelectOptions[]
 }
 
-const Add: React.FC<Props> = ({edit}) => {
+const Add: React.FC<Props> = ({edit, selectOptions}) => {
   const params = useParams();
   const navigate = useNavigate();
 
@@ -19,13 +20,13 @@ const Add: React.FC<Props> = ({edit}) => {
     text: ''
   });
 
-  const selectOptions = [
-    {title: 'Star Wars', id: 'star-wars'},
-    {title: 'Motivational', id: 'motivational'},
-    {title: 'Saying', id: 'saying'},
-    {title: 'Humor', id: 'humor'},
-    {title: 'Famous people', id: 'famous-people'},
-  ];
+  // const selectOptions = [
+  //   {title: 'Star Wars', id: 'star-wars'},
+  //   {title: 'Motivational', id: 'motivational'},
+  //   {title: 'Saying', id: 'saying'},
+  //   {title: 'Humor', id: 'humor'},
+  //   {title: 'Famous people', id: 'famous-people'},
+  // ];
 
   const quoteChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const {name, value} = e.target;
