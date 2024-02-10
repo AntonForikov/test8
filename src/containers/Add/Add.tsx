@@ -20,14 +20,6 @@ const Add: React.FC<Props> = ({edit, selectOptions}) => {
     text: ''
   });
 
-  // const selectOptions = [
-  //   {title: 'Star Wars', id: 'star-wars'},
-  //   {title: 'Motivational', id: 'motivational'},
-  //   {title: 'Saying', id: 'saying'},
-  //   {title: 'Humor', id: 'humor'},
-  //   {title: 'Famous people', id: 'famous-people'},
-  // ];
-
   const quoteChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const {name, value} = e.target;
 
