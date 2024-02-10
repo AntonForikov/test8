@@ -43,12 +43,15 @@ const Home: React.FC<Props> = ({selectOptions}) => {
     void getData();
   };
 
-  return (<div className='d-flex'>
-    <Category selectOptions={selectOptions} />
+  return (
+    <div className='d-flex justify-content-between'>
+      <div>
+        <Category selectOptions={selectOptions} />
+      </div>
 
     {isLoading ? <Spinner/> : quotes.length > 0 ?
       <div>
-        <h1>All</h1>
+        <h1>ALL</h1>
         {quotes.map(quote => <Quote key={Math.random()} quote={quote} onClick={() => deleteQuote(quote.id)}/>)}
       </div>
       : <h1>There is no quotes</h1>

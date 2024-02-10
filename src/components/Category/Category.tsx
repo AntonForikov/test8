@@ -51,11 +51,15 @@ const Category: React.FC<Props> = ({selectOptions}) => {
   if (!quotes) return <h1>Category not found</h1>;
 
   return (
-    <div>
-      <NavLink to={`/`} className="d-block">All</NavLink>
-      {selectOptions.map(link => <NavLink className='d-block' to={`/quote/${link.id}`} key={Math.random()}>{link.title}</NavLink>)}
-      <h1>{param.categoryId}</h1>
-      {quotes.map(quote => <Quote key={Math.random()} quote={quote} onClick={() =>deleteQuote(quote.id)} />)}
+    <div className='d-flex justify-content-between '>
+      <div>
+        <NavLink to={`/`} className="d-block">All</NavLink>
+        {selectOptions.map(link => <NavLink className='d-block' to={`/quote/${link.id}`} key={Math.random()}>{link.title}</NavLink>)}
+      </div>
+      <div className='w-75'>
+        <h1>{param.categoryId?.split('-').join(' ').toUpperCase()}</h1>
+        {quotes.map(quote => <Quote key={Math.random()} quote={quote} onClick={() =>deleteQuote(quote.id)} />)}
+      </div>
     </div>
   );
 };
