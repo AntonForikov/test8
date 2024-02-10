@@ -39,7 +39,7 @@ const Add: React.FC<Props> = ({edit}) => {
 
   if (edit) {
     const setCurrentQuote = useCallback(async  () => {
-        const currentQuote = await axiosAPI.get<ApiQuote | null>(`/posts/${params.id}.json`);
+        const currentQuote = await axiosAPI.get<ApiQuote | null>(`/quotes/${params.id}.json`);
         if (currentQuote.data) {
           setQuote(currentQuote.data);
         }
