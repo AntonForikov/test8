@@ -15,10 +15,6 @@ const Home: React.FC = () => {
       const response = await axiosAPI.get<ApiQuotes | null>('/quotes.json');
       const quotesApi = response.data;
 
-      if (!quotesApi) {
-        alert("This endpoint is empty.");
-      }
-
       if (quotesApi) {
         setQuotes(Object.keys(quotesApi).map((id) => ({
           ...quotesApi[id],
@@ -44,7 +40,7 @@ const Home: React.FC = () => {
   };
 
   return (<>
-    {isLoading ? <Spinner/> :
+    {isLoading ? <Spinner/> : quotes.length > 0 ?
       <>
         <h1>All</h1>
         {quotes.map(quote => {
@@ -59,6 +55,7 @@ const Home: React.FC = () => {
           );
         })}
       </>
+      : <h1>There is no quotes</h1>
     }
   </>);
 };

@@ -29,7 +29,6 @@ const Add: React.FC<Props> = ({edit}) => {
 
   const quoteChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const {name, value} = e.target;
-    console.log(name, value);
 
     setQuote((prevState) => ({
       ...prevState,
@@ -53,19 +52,6 @@ const Add: React.FC<Props> = ({edit}) => {
   useEffect(() => {
     void setCurrentQuote();
   }, [setCurrentQuote]);
-
-  // if (edit) {
-  //   const setCurrentQuote = useCallback(async  () => {
-  //       const currentQuote = await axiosAPI.get<ApiQuote | null>(`/quotes/${params.id}.json`);
-  //       if (currentQuote.data) {
-  //         setQuote(currentQuote.data);
-  //       }
-  //     }, [params.id]);
-  //
-  //   useEffect(() => {
-  //     void setCurrentQuote();
-  //   }, [setCurrentQuote]);
-  // }
 
   const onFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,7 +87,7 @@ const Add: React.FC<Props> = ({edit}) => {
             required
           >
             <option value=''>--Select category--</option>
-            {selectOptions.map((option) => <option key={Math.random()}>{option.title}</option>)}
+            {selectOptions.map((option) => <option key={Math.random()} value={option.id}>{option.title}</option>)}
           </select>
 
           <label htmlFor="title">Author: </label>
